@@ -48,7 +48,7 @@ if uploaded_file is not None:
         with st.spinner("Running YOLO detection..."):
             results = model.predict(image, device="cpu")
 
-        st.success("✅ Detection complete! See below 👇")
+    
 
 
         st.success("✅ Detection complete! See below 👇")
