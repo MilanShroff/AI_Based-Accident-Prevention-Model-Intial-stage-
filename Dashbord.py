@@ -45,11 +45,15 @@ if uploaded_file is not None:
 
 
     if st.button("Run Detection"):
-        results = model.predict(image)
+        with st.spinner("Running YOLO detection..."):
+            results = model.predict(image, device="cpu")
+
+        st.success("✅ Detection complete! See below 👇")
+
 
         st.success("✅ Detection complete! See below 👇")
 
         for r in results:
-            im_array = r.plot() 
-            im = Image.fromarray(im_array)
-            st.image(im, caption='Detection Result', use_column_width=True)
+           im_array = results[0].plot()
+           im = Image.fromarray(im_array)
+           st.image(im, caption='Detection Result', use_column_width=True)
