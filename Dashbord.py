@@ -2,10 +2,10 @@ import streamlit as st
 from PIL import Image
 from ultralytics import YOLO
 
-# ✅ Load your custom trained model
+
 model = YOLO('best.pt')
 
-# 🚧 App title and description
+
 st.title("AI-Based Accident Prevention in MMS")
 st.write(
     """
@@ -16,7 +16,7 @@ st.write(
     """
 )
 
-# ✅ Custom CSS for style
+
 st.markdown("""
 <style>
 .big-font {
@@ -32,24 +32,24 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# ✅ Prompt text
+
 st.markdown('<p class="big-font">Upload an image below 👇</p>', unsafe_allow_html=True)
 
-# ✅ File uploader
+
 uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
 
 if uploaded_file is not None:
-    # ✅ Show uploaded image
+ 
     image = Image.open(uploaded_file)
     st.image(image, caption='Uploaded Image', use_column_width=True)
 
-    # ✅ Run detection on button click
+
     if st.button("Run Detection"):
         results = model.predict(image)
 
         st.success("✅ Detection complete! See below 👇")
 
         for r in results:
-            im_array = r.plot()  # YOLO plots the detection
+            im_array = r.plot() 
             im = Image.fromarray(im_array)
             st.image(im, caption='Detection Result', use_column_width=True)
